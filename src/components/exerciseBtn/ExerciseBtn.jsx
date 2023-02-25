@@ -1,14 +1,20 @@
 import "./ExerciseBtn.css"
-import Timer from "../timer/Timer"
 import { Link } from "react-router-dom"
 
 const ExerciseBtn = (props) => {
+  const renderExerciseInfo = () => {
+    if (props.type === "timer") {
+      return <p className="exercise-info">{props.duration} min</p>
+    } else if (props.type === "counter") {
+      return <p className="exercise-info">{props.reps} reps</p>
+    }
+  }
   return (
     <>
-      <Link to="/timer">
+      <Link to={`/${props.type}`} state={"hello"}>
         <div className="exercise-btn">
-          <h3 className="exercise-name">Run</h3>
-          <p className="exercise-info">20 min</p>
+          <h3 className="exercise-name">{props.name}</h3>
+          {renderExerciseInfo()}
         </div>
       </Link>
     </>
