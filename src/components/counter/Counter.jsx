@@ -1,8 +1,10 @@
 import "./Counter.css"
 import TopBar from "../topBar/TopBar"
 import { useState } from "react"
+import { useLocation } from "react-router-dom"
 
 const Counter = () => {
+  const location = useLocation()
   let [reps, setReps] = useState(0)
 
   const resetReps = () => {
@@ -27,10 +29,10 @@ const Counter = () => {
     <div className="exercise-page">
       <TopBar resetFunction={resetReps} />
       <div className="exercise">
-        <h1>Push Ups</h1>
+        <h1>{location.state.name}</h1>
         <h2>
           {reps}
-          <span>/ 20</span>
+          <span>/ {location.state.reps}</span>
         </h2>
         <div className="clickers">
           <button onClick={decrementReps}>-</button>

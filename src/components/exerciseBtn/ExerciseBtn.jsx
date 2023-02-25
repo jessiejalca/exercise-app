@@ -11,7 +11,14 @@ const ExerciseBtn = (props) => {
   }
   return (
     <>
-      <Link to={`/${props.type}`} state={"hello"}>
+      <Link
+        to={`/${props.type}`}
+        state={{
+          name: `${props.name}`,
+          type: `${props.type}`,
+          duration: `${props.duration}`,
+          reps: `${props.reps}`,
+        }}>
         <div className="exercise-btn">
           <h3 className="exercise-name">{props.name}</h3>
           {renderExerciseInfo()}
