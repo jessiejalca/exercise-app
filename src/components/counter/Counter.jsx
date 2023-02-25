@@ -1,3 +1,4 @@
+import TopBar from "../topBar/TopBar"
 import { useState } from "react"
 
 const Counter = () => {
@@ -23,6 +24,7 @@ const Counter = () => {
 
   return (
     <>
+      <TopBar resetFunction={resetReps} />
       <h1>Push Ups</h1>
       <h2>
         {reps}
