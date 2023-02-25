@@ -1,59 +1,52 @@
-// Countdown Timer from https://stackoverflow.com/questions/20618355/how-to-write-a-countdown-timer-in-javascript
+// Timer functionality from https://stackoverflow.com/questions/58162642/how-to-reset-data-in-useeffect-react-hooks-before-each-rendering
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
+import TopBar from "../topBar/TopBar"
 
 const Timer = () => {
-  const { state } = useLocation()
-  console.log(state)
+  const location = useLocation()
+  const initMin = location.state.duration
+  const initSec = 0
+  const [minutes, setMinutes] = useState(initMin)
+  const [seconds, setSeconds] = useState(initSec)
+
+  useEffect(() => {
+    let myInterval = setInterval(() => {
+      if (seconds > 0) {
+        setSeconds(seconds - 1)
+      }
+      if (seconds === 0) {
+        if (minutes === 0) {
+          clearInterval(myInterval)
+        } else {
+          setMinutes(minutes - 1)
+          setSeconds(59)
+        }
+      }
+    }, 1000)
+    return () => {
+      clearInterval(myInterval)
+    }
+  })
+
+  const resetTimer = () => {
+    setMinutes(initMin)
+    setSeconds(initSec)
+  }
 
   return (
-    <>
-      <h1>Timer Exercise</h1>
-    </>
+    <div className="exercise-page">
+      <TopBar resetFunction={resetTimer} />
+      <div className="exercise">
+        <h1>{location.state.name}</h1>
+        <h2>
+          {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+        </h2>
+        {/* <button onClick={() => startTimer()}>Start the clock</button> */}
+      </div>
+    </div>
   )
 }
-
-// const Timer = () => {
-//   const location = useLocation()
-//   console.log(location.state)
-
-//   let [time, setTime] = useState(`${props.duration}:00`)
-//   const timeInt = parseInt(time, 10)
-//   console.log(from)
-
-//   const startTimer = (duration) => {
-//     duration = duration * 60
-//     let timer = duration,
-//       minutes,
-//       seconds
-
-//     const countdown = setInterval(() => {
-//       minutes = parseInt(timer / 60, 10)
-//       seconds = parseInt(timer % 60, 10)
-
-//       minutes = minutes < 10 ? "0" + minutes : minutes
-//       seconds = seconds < 10 ? "0" + seconds : seconds
-
-//       setTime(`${minutes}:${seconds}`)
-
-//       if (--timer < 0) {
-//         clearInterval(countdown)
-//       }
-//     }, 1000)
-//   }
-
-//   return (
-//     <>
-//       <div>
-//         <button>Return</button>
-//         <button>Reset</button>
-//       </div>
-//       <h1>{props.name}</h1>
-//       <h2>{time}</h2>
-//       <button onClick={() => startTimer(timeInt)}>Start the clock</button>
-//     </>
-//   )
-// }
 
 export default Timer
