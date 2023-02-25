@@ -1,3 +1,4 @@
+import "./Counter.css"
 import TopBar from "../topBar/TopBar"
 import { useState } from "react"
 
@@ -23,18 +24,20 @@ const Counter = () => {
   }
 
   return (
-    <>
+    <div className="exercise-page">
       <TopBar resetFunction={resetReps} />
-      <h1>Push Ups</h1>
-      <h2>
-        {reps}
-        <span>/20</span>
-      </h2>
-      <div>
-        <button onClick={decrementReps}>-</button>
-        <button onClick={increaseReps}>+</button>
+      <div className="exercise">
+        <h1>Push Ups</h1>
+        <h2>
+          {reps}
+          <span>/ 20</span>
+        </h2>
+        <div className="clickers">
+          <button onClick={decrementReps}>-</button>
+          <button onClick={increaseReps}>+</button>
+        </div>
       </div>
-    </>
+    </div>
   )
 }
 

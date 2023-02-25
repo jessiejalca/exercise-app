@@ -1,0 +1,35 @@
+.exercise > .clickers {
+  margin-top: 1rem;
+  min-width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.clickers > button {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  width: 5rem;
+  aspect-ratio: 1;
+  line-height: 100%;
+  font-size: 4rem;
+  font-weight: 900;
+  border: none;
+  border-radius: 100rem;
+  background-color: #909090;
+}
+
+.exercise > h1 {
+  font-size: 3.3rem;
+  font-weight: 400;
+  margin-bottom: 0.2rem;
+}
+
+.exercise > h2 {
+  font-size: 5rem;
+  font-weight: 900;
+}
+
+.exercise > h2 > span {
+  font-size: 1.6rem;
+}
